@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// Rota para listar todos os livros
 router.get('/', async (req, res) => {
     try {
         const [livros] = await db.query('SELECT * FROM livros');
@@ -13,7 +12,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Rota para buscar um livro por ID
 router.get('/:id', async (req, res) => {
     try {
         const [livro] = await db.query('SELECT * FROM livros WHERE id = ?', [req.params.id]);
@@ -27,7 +25,6 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Rota para criar um novo livro
 router.post('/', async (req, res) => {
     try {
         const { titulo, autor, disponivel } = req.body;
@@ -36,7 +33,7 @@ router.post('/', async (req, res) => {
         }
         const [result] = await db.query(
             'INSERT INTO livros (titulo, autor, disponivel) VALUES (?, ?, ?)',
-            [titulo, autor, disponivel !== undefined ? disponivel : true] // Default para true
+            [titulo, autor, disponivel !== undefined ? disponivel : true]
         );
         res.status(201).json({ message: 'Livro cadastrado com sucesso', id: result.insertId, titulo, autor, disponivel: disponivel !== undefined ? disponivel : true });
     } catch (err) {
@@ -45,7 +42,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Rota para atualizar um livro
 router.put('/:id', async (req, res) => {
     try {
         const { titulo, autor, disponivel } = req.body;
@@ -67,7 +63,6 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// Rota para deletar um livro
 router.delete('/:id', async (req, res) => {
     try {
         const [result] = await db.query('DELETE FROM livros WHERE id = ?', [req.params.id]);

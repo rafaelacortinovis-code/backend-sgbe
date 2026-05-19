@@ -2,9 +2,9 @@
   "name": "backend-sgbe",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/rafaelacortinovis-code/backend-sgbe#readme",
   "dependencies": {
     "express": "^5.2.1",
+    "dotenv": "^16.4.5",
     "mysql2": "^3.22.3"
   }
 }
